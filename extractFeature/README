@@ -1,0 +1,6 @@
+A program to extract feature from the raw sequence
+
+It basically compare each pattern with each sequence, if the sequence contains 
+the sequence, than the feature corresponding to the pattern of that sequence is
+set to one, otherwise set to zero.
+

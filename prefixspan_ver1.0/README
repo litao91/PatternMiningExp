@@ -1,0 +1,11 @@
+
+ PrefiSpan --- An Implementation of Prefix-projected Sequential Pattern mining
+
+ Author: Yasuo Tabei <tabei@cb.k.u-tokyo.ac.jp>
+         Dept of Computational Biology,
+         Graduate School of Frontier Science,
+	 University of Tokyo
+
+And modified by Gary, LI Tao.
+
+Basically make it to fit our data, and delete some useless output.
