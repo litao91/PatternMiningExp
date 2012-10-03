@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -g -W -Wall -ansi
+CXXFLAGS = -O3 -W -Wall -ansi
 LINKFLAGS =  -lm
 
 mcmcspan: main.o utility.o mcmc_span.o

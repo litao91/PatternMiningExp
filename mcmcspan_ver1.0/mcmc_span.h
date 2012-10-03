@@ -25,7 +25,8 @@ class McmcSpan {
     std::vector<std::vector<unsigned int> > _m_database;
     int _m_min_sup;
     std::set<std::vector<unsigned int>, CompareSeq> _m_patterns;
-    std::vector<std::vector<unsigned int> > _m_max_patterns;
+    std::set<std::vector<unsigned int>, CompareSeq> _m_max_patterns;
+    //std::vector<std::vector<unsigned int> > _m_max_patterns;
 };
 
 #endif

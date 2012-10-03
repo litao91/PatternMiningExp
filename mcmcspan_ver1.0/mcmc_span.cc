@@ -63,7 +63,7 @@ void McmcSpan::run_alg() {
         }
 
         if(surround_states.size()==0) {
-            _m_max_patterns.push_back(cur_pattern);
+            _m_max_patterns.insert(cur_pattern);
             cur_pattern.pop_back();
             continue;
         }
@@ -80,10 +80,10 @@ void McmcSpan::run_alg() {
 }
 
 void McmcSpan::print_max_pattern() {
-    vector<vector<unsigned int> >::const_iterator it;
+    set<vector<unsigned int>,CompareSeq >::const_iterator it;
     vector<unsigned int>::const_iterator it_2;
 
-    for(it = _m_max_patterns.begin(); it!=_m_max_patterns.end();it++) {
+    for(it=_m_max_patterns.begin(); it!=_m_max_patterns.end();it++) {
         for(it_2 = it->begin();it_2!=it->end();it_2++) {
             cout<<*it_2<<" ";
         }
