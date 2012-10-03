@@ -1,25 +1,18 @@
-
 CXX = g++
+CXXFLAGS = -g -W -Wall -ansi
+LINKFLAGS =  -lm
 
-CXXFLAGS = -O3 -DNDEBUG -W -Wall -Wno-deprecated -pedantic -ansi -finline-functions
-LINKFLAGS = -lm
+mcmcspan: main.o utility.o mcmc_span.o
+	$(CXX) $(CXXFLAGS) main.o utility.o mcmc_span.o $(LINKFLAGS) -o mcmc_span
 
-SRCS = \
-	Main.cpp \
-	Prefixspan.cpp \
+main.o:main.cc mcmc_span.h
+	$(CXX) $(CXXFLAGS) -c main.cc
 
-OBJS = $(SRCS:%.cpp=%.o)
+uitlity.o:utility.cc utility.h
+	$(CXX) $(CXXFLAGS) -c utility.cc
 
-all: prefixspan
-
-prefixspan: $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OTHERFLAGS) $(OBJS) $(LINKFLAGS) -o prefixspan
-
-debug:
-	make all CXXFLAGS="-ggdb -W -Wall -pedantic"
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(OTHERFLAGS) -c $<
+mcmc_span.o:mcmc_span.h mcmc_span.cc utility.h
+	$(CXX) $(CXXFLAGS) -c mcmc_span.cc
 
 clean:
-	rm -f prefixspan *.o *~
+	rm -f mcmcspan *.o *~
