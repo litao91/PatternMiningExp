@@ -64,7 +64,7 @@ void McmcSpan::run_alg() {
 
         if(surround_states.size()==0) {
             _m_max_patterns.insert(cur_pattern);
-            cur_pattern.pop_back();
+            cur_pattern.clear();
             continue;
         }
 
