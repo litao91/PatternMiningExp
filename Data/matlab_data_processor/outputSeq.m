@@ -1,9 +1,11 @@
-function outputSeq(cleaned_data)
+function outputSeq(cleaned_data,outfile)
 data_size = size(cleaned_data,2);
-fp = fopen('seq.data', 'w');
+fp = fopen(outfile, 'w');
 for i = 1:data_size
-    fprintf(fp, '%d ', cleaned_data(i).seq);
-    fprintf(fp,'\n');
+    if(cleaned_data(i).label <= 8) 
+        fprintf(fp, '%d ', cleaned_data(i).seq);
+        fprintf(fp,'\n');
+    end
 end
 fclose(fp);
 end
