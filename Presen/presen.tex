@@ -1,0 +1,51 @@
+\documentclass{beamer}
+\usepackage{beamerthemeshadow}
+\begin{document}
+\title{MCMC Span Experiment Report}
+\author{LI Tao}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introduction}
+\begin{frame}\frametitle{Introductin}
+\begin{itemize}
+\item Problem: Mining frequent pattern in large-scale database efficiently.
+\item Basic Idea: Use MCMC randomly traverse the data, and retrieve proper
+sequence fulfil the requirement.
+\end{itemize}
+\end{frame}
+
+\section{Algorithm Overview}
+\begin{frame}\frametitle{Algorithm Overview}
+\begin{enumerate}
+\item Starts from null state as the current state 
+\item If current state is max pattern, store it to the dictionary, and revert
+the current state to null.
+\item Calculate all the next state of the current state.
+\item Check the frequency of each next state, erase those lower than
+min-support.
+\item Randomly pick one next state as the current state.
+\item Repeat steps 2 to 5 until the size of dictionary is 20.
+\end{enumerate}
+\end{frame}
+
+\section{Experiment Detail}
+\begin{frame}\frametitle{Experiment Detail}
+\begin{itemize}
+\item Experiment Data:
+\begin{itemize}
+\item Trajectory of handwriting (normalized and discretized),
+\item The character of the handwriting as labels, \textbf{8} labels are selected. 
+\item Data Size:1236
+\end{itemize}
+\item Experiment:
+\begin{itemize}
+\item Configuration: min-support of the frequent pattern: 100
+\item Accuracy of svm-prediction: 64.5833\%
+\end{itemize}
+\item Comparison: In the same configuration, prefixspan got 59.25\% accuracy.
+\end{itemize}
+\end{frame}
+\end{document}
