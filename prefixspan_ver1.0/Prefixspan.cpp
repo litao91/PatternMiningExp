@@ -30,7 +30,7 @@ void Prefixspan::read(const string &_filename, Pairdata &pairdata) {
 
 /********************************************************************
  * Run prefixspan
- ********************************************************************/
+ ******************************************************************/
 void Prefixspan::run(const string &_filename)
 {
     Pairdata pairdata;
@@ -66,8 +66,10 @@ void Prefixspan::print_pattern(Pairdata &projected) {
  * 2. Find the pattern with one more entry and do DFS recursively
  */
 void Prefixspan::project(Pairdata &projected) {
-    if (projected.database.size() < min_sup)
+    int support = 0;
+    if ((support = projected.database.size()) < min_sup)
         return;
+    cout << "freq:" << support << " ";
     print_pattern(projected);
 
     if (max_pat != 0 && pattern.size() == max_pat)
@@ -123,6 +125,7 @@ void Prefixspan::project(Pairdata &projected) {
 }
 
 void Prefixspan::print_closed_pattern() const {
+    /*
     cout<<"Closed pattern:"<<endl;
     vector<vector<unsigned int> >::const_iterator it;
     vector<unsigned int>::const_iterator it_2;
@@ -132,5 +135,6 @@ void Prefixspan::print_closed_pattern() const {
         }
         cout<<endl;
     }
+    */
 }
 
