@@ -25,6 +25,7 @@ public class McmcSpan {
     private String mFilename;
     private int mThreadNum;
     private int mItemNum;
+    private boolean done;
 
     //All the seuqences read from the file is database
     private List<Sequence> mDatabase;
@@ -36,10 +37,15 @@ public class McmcSpan {
         mcmcSpan.parseParameter(args);
         mcmcSpan.ReadnProcessData();
         mcmcSpan.startThreads();
-        mcmcSpan.printMaxPattern();
     }
 
-    public void printMaxPattern() {
+    public synchronized void printMaxPattern() {
+        if(!done) {
+            done = true;
+        } else {
+            return;
+        }
+
         Iterator<Sequence> iter = mMaxPattern.iterator();
         while(iter.hasNext()) {
             printASeq(iter.next().getSeq());
@@ -133,7 +139,7 @@ public class McmcSpan {
 
             Random ranGen = new Random();
 
-            while(mMaxPattern.size() <= mK) {
+            while(mMaxPattern.size() < mK) {
                 surroundStates.clear();
                 tmpPattern.clear();
                 tmpPattern = new ArrayList<Integer>(curPattern);
@@ -156,9 +162,12 @@ public class McmcSpan {
                     tmpPattern.remove(tmpPattern.size()-1);
                 }
                 if(surroundStates.size()==0) {
-                    printASeq(curPattern);
                     synchronized(mMaxPattern) {
-                        mMaxPattern.add(new Sequence(curPattern));
+                        if(mMaxPattern.size() < mK) {
+                            mMaxPattern.add(new Sequence(curPattern));
+                        }
+                        long threadId = Thread.currentThread().getId();
+                        System.out.printf("In thread:%d, size:%d\n",threadId ,mMaxPattern.size());
                     }
                     curPattern.clear();
                     continue;
@@ -168,6 +177,9 @@ public class McmcSpan {
                 synchronized(mFreqPattern) {
                     mFreqPattern.add(new Sequence(curPattern));
                 }
+            }
+            if(mMaxPattern.size() >= mK && !done) {
+                printMaxPattern();
             }
         }
     }
