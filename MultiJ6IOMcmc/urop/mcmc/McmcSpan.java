@@ -1,13 +1,5 @@
 package urop.mcmc;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.File;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -105,6 +97,7 @@ public class McmcSpan {
         }
     }
     public void ReadnProcessData() {
+        /*
         Path path = Paths.get(mFilename);
         List<String> lines = new ArrayList<String>();
         try{
@@ -112,6 +105,22 @@ public class McmcSpan {
         }catch(IOException e) {
 
         }
+        */
+        ArrayList<String> lines = new ArrayList<String>();
+        try {
+            FileInputStream fstream = new FileInputStream(mFilename);
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String tmpLine;
+            while((tmpLine =br.readLine()) !=null) {
+                lines.add(tmpLine);
+
+            }
+        } catch (IOException e) {
+
+        }
+
+
         mDatabase = new ArrayList<Sequence>();
         Iterator<String> iter = lines.iterator();
         //Process each line of the input
@@ -166,8 +175,6 @@ public class McmcSpan {
                         if(mMaxPattern.size() < mK) {
                             mMaxPattern.add(new Sequence(curPattern));
                         }
-                        long threadId = Thread.currentThread().getId();
-                        System.out.printf("In thread:%d, size:%d\n",threadId ,mMaxPattern.size());
                     }
                     curPattern.clear();
                     continue;
