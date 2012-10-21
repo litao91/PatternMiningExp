@@ -42,7 +42,6 @@ void gen_feature_seq(const vector<vector<int> >&patterns,
         }
         result.push_back(tmp);
     }
-    cout<<"# that have feature:"<<has_feature_count<<endl;
 }
 
 

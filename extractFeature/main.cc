@@ -12,6 +12,7 @@ int main(int argc, char** argv) {
     }
     vector<vector<int> > freq_patterns;
     vector<sequence> seqs;
+
     vector<sequence> feature_seqs;
     get_freq_seq(argv[1], freq_patterns);
     get_seqs(argv[2], seqs);

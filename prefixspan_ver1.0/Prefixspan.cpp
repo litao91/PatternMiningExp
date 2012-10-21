@@ -69,7 +69,7 @@ void Prefixspan::project(Pairdata &projected) {
     int support = 0;
     if ((support = projected.database.size()) < min_sup)
         return;
-    cout << "freq:" << support << " ";
+    cout << support << " ";
     print_pattern(projected);
 
     if (max_pat != 0 && pattern.size() == max_pat)
@@ -97,13 +97,14 @@ void Prefixspan::project(Pairdata &projected) {
     vector<Transaction> &new_database = pairdata.database;
     vector<unsigned int> &new_indices = pairdata.indices;
     for (map<unsigned int, unsigned int>::iterator it_1 = map_item.begin(); it_1 != map_item.end(); it_1++) {
-        //check for closed pattern
+        /*
         if(it_1->second == pattern.size()) {  //if the enlarged prefix still equal to the original pattern
             cur_closed_pattern.push_back(it_1->first); //increase the closed pattern
         } else {
             closed_patterns.push_back(cur_closed_pattern);
             closed_patterns.clear();
         }
+        */
         for (unsigned int i = 0; i < database.size(); i++) {
             const Transaction &transaction = database[i];
             const vector<unsigned int> &itemset = transaction.second;

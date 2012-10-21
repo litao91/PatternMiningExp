@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.HashSet;
 
 public class McmcSpan {
-    private static Charset ENCODING = StandardCharsets.UTF_8;
 
     private int mMinSup;
     private int mK;
