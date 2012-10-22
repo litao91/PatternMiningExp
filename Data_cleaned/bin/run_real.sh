@@ -24,7 +24,7 @@ for((data_num = 2; data_num <= 2; data_num++)) do
     elif [ $data_num == 2 ]; then
         cd $d2
         n=2048
-        d=225
+        d=25
     elif [ $data_num == 3 ]; then
         cd $d3
         n=422
@@ -34,7 +34,7 @@ for((data_num = 2; data_num <= 2; data_num++)) do
     cur_dir=`pwd`
 
     # Base
-    sup=10
+    sup=30
     k=20
 
     # for k 
@@ -51,12 +51,14 @@ for((data_num = 2; data_num <= 2; data_num++)) do
         java -jar $bin/mcmc.jar \
             -f $cur_dir/seq.dat \
             -k $k \
-            -min_sup $(($n/$sup))\
+            -min_sup $sup\
             -thread_num 2\
             -item_num $d  > ./mcmc.freq
 
+            #-min_sup $(($n/$sup))\
         #run prefixspan
-        $bin/prefixspan -min_sup $(($n/$sup)) $cur_dir/seq.dat > prefix.ori
+        # $bin/prefixspan -min_sup $(($n/$sup)) $cur_dir/seq.dat > prefix.ori
+        $bin/prefixspan -min_sup $sup $cur_dir/seq.dat > prefix.ori
         
         #sampling on prefix span
         java -jar $bin/TopkFinder.jar -k $k -f ./prefix.ori > prefix.topk
@@ -85,24 +87,26 @@ for((data_num = 2; data_num <= 2; data_num++)) do
 
     #for sup
     # Base
-    sup=10
+    sup=303030
     k=20
 
     cd $cur_dir
     mkdir $cur_dir/sup
-    for((sup = 5; sup <= 15; sup++ )) do
+    for((sup = 20; sup <= 50; sup=sup+5 )) do
         mkdir $cur_dir/sup/$sup
         cd $cur_dir/sup/$sup
         # run mcmc algorithm 
         java -jar $bin/mcmc.jar \
             -f $cur_dir/seq.dat \
             -k $k \
-            -min_sup `echo "$n*$sup/100"|bc`\
+            -min_sup $sup \
             -thread_num 2\
             -item_num $d  > ./mcmc.freq
 
+            #-min_sup `echo "$n*$sup/100"|bc`\
         #run prefixspan
-        $bin/prefixspan -min_sup `echo "$n*$sup/100"|bc` $cur_dir/seq.dat > prefix.ori
+        # $bin/prefixspan -min_sup `echo "$n*$sup/100"|bc` $cur_dir/seq.dat > prefix.ori
+        $bin/prefixspan -min_sup $sup $cur_dir/seq.dat > prefix.ori
 
 
         #sampling on prefix span

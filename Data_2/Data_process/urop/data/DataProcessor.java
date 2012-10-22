@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class DataProcessor {
     private static Charset ENCODING = StandardCharsets.UTF_8;
-    private static int gridSize = 15;
+    private static int gridSize = 5;
     private ArrayList<Entry> raw_db = new ArrayList<Entry>();
     private ArrayList<Trajectory> Database = new ArrayList<Trajectory>();
     private String pathPrefix;
@@ -31,15 +31,15 @@ public class DataProcessor {
         processor.processFiles(new File(args[0]));
         processor.findDataBound();
         processor.generateTrajectory();
-        //processor.printSeqOnly();
-        processor.avgLength();
+        processor.printSeqOnly();
+        //processor.avgLength();
     }
 
     void printSeqOnly() {
         Iterator<Trajectory> it = Database.iterator();
         while(it.hasNext()) {
             Trajectory tra = it.next();
-        //    System.out.printf("%d ", tra.label);
+            //System.out.printf("%d ", tra.label);
             printIter(tra.seq.iterator(), " ");
             System.out.printf("\n");
         }

@@ -124,9 +124,12 @@ public class McmcSpan {
         Iterator<String> iter = lines.iterator();
         //Process each line of the input
         //Each line is a sequence, store it in a Sequence class;
+        int count =0;
         while(iter.hasNext()) {
             String[] slices = iter.next().split(" ");
             Sequence seq_tmp = new Sequence(new ArrayList<Integer>());
+            count++;
+            System.out.printf("Line #: %d\n", count);
             for(int i = 0; i< slices.length; i++) {
                 seq_tmp.getSeq().add(Integer.parseInt(slices[i]));
             }

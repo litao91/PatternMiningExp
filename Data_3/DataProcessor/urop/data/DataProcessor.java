@@ -20,7 +20,7 @@ public class DataProcessor {
 
     private ArrayList<Sequence> seqs = new ArrayList<Sequence>();
 
-    int gridNum = 10;
+    int gridNum = 7;
 
     float maxLAT = -9999999;
     float minLAT = 9999999;
@@ -43,7 +43,7 @@ public class DataProcessor {
         processor.calDataBound();
         processor.generateSeqs();
         processor.averageLength();
-        //processor.printSeqs();
+        processor.printSeqs();
     }
 
     void averageLength() {
@@ -64,7 +64,7 @@ public class DataProcessor {
         float sum_lon = 0;
         int count = 0;
         while(iter.hasNext()) {
-            if(count == 5) {
+            if(count == 30) {
                 int num = getEntryNum(new Position(sum_lon/count, sum_lat/count), gridNum);
                 the_seq.seqs.add(num);
                 count = 0;
@@ -165,7 +165,7 @@ public class DataProcessor {
         Iterator<Sequence> iter = seqs.iterator();
         while(iter.hasNext()) {
             Sequence seq = iter.next();
-         //   System.out.printf("%d ", seq.label);
+            System.out.printf("%d ", seq.label);
             printSeq(seq.seqs);
             System.out.printf("\n");
         }
